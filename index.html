@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+  <title>ANSI Terms Dictionary</title>
+  <link rel="stylesheet" href="styles.css">
+
+  <style>
+
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>ANSI Terms Dictionary</h1>
+  </header>
+
+  <nav>
+
+    <input type="text" id="searchInput" placeholder="Type to search..." style="display: none;">
+    <button id="searchButton"><i class="fas fa-search"></i> Search</button>
+
+          
+    <button id="browseButton"><i class="fas fa-list-ul"></i> Browse</button>
+
+    
+    <button id="copyButton" style="display: none;"><i class="fas fa-copy"></i> Copy Selected Terms</button>
+
+
+    
+  </nav>
+
+  <main>
+    <section id="searchPage" style="display: none;">
+      <h2>Search</h2>
+      <div class="searchInfo"></div>
+      <input type="text" id="searchInputPage" placeholder="Type to search...">
+      <ul id="searchResults"></ul>
+    </section>
+
+    <section id="browsePage">
+      <h2>Browse</h2>
+      <ul id="browseList" class="browseSection"></ul>
+      <ul id="browseAcronyms" class="browseSection"></ul>
+      <ul id="browseDeviceNumbers" class="browseSection"></ul>
+    </section>
+  </main>
+  <!-- <footer style="text-align: center; padding: 20px; background-color: #f4f4f4;"> -->
+    <footer>
+    <p>Made with ❤️ by Ashique Ali</p>
+    <a href="https://linkedin.com/in/ashiqaliaslam" target="_blank" >
+        <i class="fab fa-linkedin"></i> LinkedIn
+      </a>
+      <a href="https://twitter.com/ashiqaliaslam" target="_blank">
+        <i class="fab fa-twitter"></i> X (Twitter)
+      </a>      
+  </footer>
+  
+  <script src="script.js"></script>
+</body>
+</html>
