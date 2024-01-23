@@ -11,28 +11,33 @@ fetch('ansi_terms.json')
   .catch(error => console.error('Error loading data:', error));
 
 function populateSearchResults(query) {
-  const searchResults = document.getElementById('searchResults');
-  searchResults.innerHTML = ''; // Clear previous results
+    const searchResults = document.getElementById('searchResults');
+    searchResults.innerHTML = ''; // Clear previous results
+  
+    const lowerCaseQuery = query.toLowerCase(); // Convert the query to lower case
+  
+    for (const key in data.suffixes) {
+      if (key.toLowerCase().includes(lowerCaseQuery) || data.suffixes[key].toLowerCase().includes(lowerCaseQuery)) {
+        // createListItem(searchResults, key, data.suffixes[key], 'Suffix');
+        createListItem(searchResults, key, data.suffixes[key], 'Suffix', query);
 
-  for (const key in data.suffixes) {
-    if (key.includes(query) || data.suffixes[key].toLowerCase().includes(query.toLowerCase())) {
-      createListItem(searchResults, key, data.suffixes[key], 'Suffix');
+      }
     }
-  }
-
-  for (const key in data.common_acronyms) {
-    if (key.includes(query) || data.common_acronyms[key].toLowerCase().includes(query.toLowerCase())) {
-      createListItem(searchResults, key, data.common_acronyms[key], 'Acronym');
+  
+    for (const key in data.common_acronyms) {
+      if (key.toLowerCase().includes(lowerCaseQuery) || data.common_acronyms[key].toLowerCase().includes(lowerCaseQuery)) {
+        createListItem(searchResults, key, data.common_acronyms[key], 'Acronym', query);
+      }
     }
-  }
-
-  for (const key in data.device_numbers) {
-    if (key.includes(query) || data.device_numbers[key].toLowerCase().includes(query.toLowerCase())) {
-      createListItem(searchResults, key, data.device_numbers[key], 'Device Number');
+  
+    for (const key in data.device_numbers) {
+      if (key.toLowerCase().includes(lowerCaseQuery) || data.device_numbers[key].toLowerCase().includes(lowerCaseQuery)) {
+        createListItem(searchResults, key, data.device_numbers[key], 'Device Number', query);
+      }
     }
+    updateSelectionStyle();
   }
-  updateSelectionStyle();
-}
+  
 
 function populateBrowsePage() {
   const browseList = document.getElementById('browseList');
@@ -68,12 +73,24 @@ function populateBrowsePage() {
   }
 }
 
-function createListItem(parent, key, value, category) {
-  const listItem = document.createElement('li');
-  listItem.innerHTML = `<span class="termKey">${key}</span>: ${value} (${category})`;
-  listItem.setAttribute('data-category', category);
-  parent.appendChild(listItem);
-}
+// function createListItem(parent, key, value, category) {
+//   const listItem = document.createElement('li');
+//   listItem.innerHTML = `<span class="termKey">${key}</span>: ${value} (${category})`;
+//   listItem.setAttribute('data-category', category);
+//   parent.appendChild(listItem);
+// }
+
+function createListItem(parent, key, value, category, query) {
+    const listItem = document.createElement('li');
+    const highlightedKey = key.replace(new RegExp(`(${query})`, 'gi'), '<span class="highlight">$1</span>');
+    const highlightedValue = value.replace(new RegExp(`(${query})`, 'gi'), '<span class="highlight">$1</span>');
+    listItem.innerHTML = `<span class="termKey">${highlightedKey}</span>: ${highlightedValue} (${category})`;
+    listItem.setAttribute('data-category', category);
+    parent.appendChild(listItem);
+  }
+  
+
+  
 
 function toggleSelection(term) {
   const index = selectedTerms.indexOf(term);
@@ -153,3 +170,25 @@ copyButton.addEventListener('click', copySelectedTerms);
 document.addEventListener('click', function () {
   copyButton.style.display = selectedTerms.length > 0 ? 'block' : 'none';
 });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
